@@ -66,7 +66,7 @@
                 ${answer.contents}
             </div>
             <div>
-            	<a href="#">삭제</a>
+            	<a href="#" class="deleteAnswer" data-danswerid ="${answer.answerId}" data-dquestionid="${answer.questionId}">삭제</a>
             </div>
         </div>	
         </c:forEach>    
