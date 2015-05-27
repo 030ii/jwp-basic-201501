@@ -19,11 +19,8 @@ public class DelAnswerController extends AbstractController {
 		Long answerId = ServletRequestUtils.getRequiredLongParameter(request, "answerId");
 		Long questionId = ServletRequestUtils.getRequiredLongParameter(request, "questionId");
 
-		System.out.println("asdasd1");
 		answerDao.delete(answerId); // 답변 삭제
-		System.out.println("asdasd2");
 		questionDao.decreaseCountOfComment(questionId); // 답변수 감소  
-		System.out.println("asdasd3");
 		ModelAndView mav = jstlView("redirect:/"); // 새로고침!
 		return mav;
 	}
