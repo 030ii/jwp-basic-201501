@@ -8,7 +8,7 @@
 	<div id="main">
 		<c:set var="method" value="post" />
 				
-		<form name="questionForm" action="/save.next" method="${method}">
+		<form name="questionForm" action="/save.next"  method="${method}">
 			<table>
 				<tr>
 					<td width="80">글쓴이</td>

@@ -3,6 +3,7 @@ package core.mvc;
 import java.util.HashMap;
 import java.util.Map;
 
+import next.controller.AddQuestionController;
 import next.controller.ListController;
 import next.controller.ShowController;
 
@@ -14,6 +15,7 @@ public class RequestMapping {
 	private Map<String, Controller> mappings = new HashMap<String, Controller>();
 	
 	public void initMapping() {
+		mappings.put("/save.next", new AddQuestionController()); // 3번 - 질문하기 기능 
 		mappings.put("/list.next", new ListController());
 		mappings.put("/show.next", new ShowController());
 		mappings.put("/form.next", new ForwardController("form.jsp"));
