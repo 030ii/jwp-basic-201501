@@ -6,6 +6,7 @@ import java.util.Map;
 import next.controller.AddAnswerController;
 import next.controller.AddQuestionController;
 import next.controller.DelAnswerController;
+import next.controller.JsonListController;
 import next.controller.ListController;
 import next.controller.ShowController;
 
@@ -19,6 +20,7 @@ public class RequestMapping {
 	public void initMapping() {
 		mappings.put("/save.next", new AddQuestionController()); // 3번 - 질문하기 기능 
 		mappings.put("/list.next", new ListController());
+		mappings.put("/api/list.next", new JsonListController()); // 8번 
 		mappings.put("/show.next", new ShowController());
 		mappings.put("/api/addanswer.next", new AddAnswerController()); // 5번 - 답변하기 기능 
 		mappings.put("/api/delanswer.next", new DelAnswerController()); // 6번 - 답변하기 기능 
