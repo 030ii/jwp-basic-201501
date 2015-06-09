@@ -9,6 +9,8 @@ import next.controller.DelAnswerController;
 import next.controller.JsonListController;
 import next.controller.ListController;
 import next.controller.ShowController;
+import next.controller.UpdateController;
+import next.controller.UpdateQuestionController;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,8 @@ public class RequestMapping {
 	
 	public void initMapping() {
 		mappings.put("/save.next", new AddQuestionController()); // 3번 - 질문하기 기능 
+		mappings.put("/updateForm.next", new UpdateQuestionController()); // 9번 - 질문 수정 기능 
+		mappings.put("/update.next", new UpdateController()); // 9번 - 질문 수정 기능 
 		mappings.put("/list.next", new ListController());
 		mappings.put("/api/list.next", new JsonListController()); // 8번 
 		mappings.put("/show.next", new ShowController());

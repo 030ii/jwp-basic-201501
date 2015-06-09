@@ -14,19 +14,23 @@ public class QuestionDao {
 	public void insert(Question question) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "INSERT INTO QUESTIONS (writer, title, contents, createdDate, countOfComment) VALUES (?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, 
-				question.getWriter(), 
-				question.getTitle(), 
+		jdbcTemplate.update(sql, question.getWriter(), question.getTitle(),
 				question.getContents(),
-				new Timestamp(question.getTimeFromCreateDate()), 
+				new Timestamp(question.getTimeFromCreateDate()),
 				question.getCountOfComment());
 	}
-	
+
+	public void update(Question question, long questionId) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = "UPDATE QUESTIONS SET writer = ?, title = ?, contents = ? WHERE questionId = ?";
+		jdbcTemplate.update(sql, question.getWriter(), question.getTitle(), question.getContents(), questionId);
+	}
+
 	public List<Question> findAll() {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "SELECT questionId, writer, title, createdDate, countOfComment FROM QUESTIONS "
 				+ "order by questionId desc";
-		
+
 		RowMapper<Question> rm = new RowMapper<Question>() {
 			@Override
 			public Question mapRow(ResultSet rs) throws SQLException {
@@ -35,9 +39,9 @@ public class QuestionDao {
 						rs.getTimestamp("createdDate"),
 						rs.getInt("countOfComment"));
 			}
-			
+
 		};
-		
+
 		return jdbcTemplate.query(sql, rm);
 	}
 
@@ -45,7 +49,7 @@ public class QuestionDao {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "SELECT questionId, writer, title, contents, createdDate, countOfComment FROM QUESTIONS "
 				+ "WHERE questionId = ?";
-		
+
 		RowMapper<Question> rm = new RowMapper<Question>() {
 			@Override
 			public Question mapRow(ResultSet rs) throws SQLException {
@@ -55,18 +59,18 @@ public class QuestionDao {
 						rs.getTimestamp("createdDate"),
 						rs.getInt("countOfComment"));
 			}
-			
+
 		};
-		
+
 		return jdbcTemplate.queryForObject(sql, rm, questionId);
 	}
-	
+
 	public void increaseCountOfComment(Long questionId) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "UPDATE QUESTIONS SET countOfComment = countOfComment + 1 WHERE questionId = ?";
 		jdbcTemplate.update(sql, questionId);
 	}
-	
+
 	public void decreaseCountOfComment(Long questionId) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "UPDATE QUESTIONS SET countOfComment = countOfComment - 1 WHERE questionId = ?";
